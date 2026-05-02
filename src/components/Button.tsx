@@ -17,15 +17,15 @@ const base =
 
 const variants: Record<ButtonVariant, Record<ButtonState, string>> = {
   primary: {
-    default:  'bg-brand        text-text-white    px-4 py-3',
-    hover:    'bg-brand        text-text-white    px-4 py-3 opacity-85',
-    pressed:  'bg-brand        text-text-white    px-4 py-3 opacity-75',
+    default:  'bg-brand          text-text-white    px-4 py-3 hover:opacity-85 active:opacity-75',
+    hover:    'bg-brand          text-text-white    px-4 py-3 opacity-85',
+    pressed:  'bg-brand          text-text-white    px-4 py-3 opacity-75',
     disabled: 'bg-brand-disabled text-text-disabled px-4 py-3 cursor-not-allowed',
   },
   outline: {
-    default:  'border-2 border-stroke-brand   text-text-brand    bg-transparent px-4 py-3',
-    hover:    'border-2 border-stroke-brand   text-text-brand    bg-transparent px-4 py-3 opacity-85',
-    pressed:  'border-2 border-stroke-brand   text-text-brand    bg-transparent px-4 py-3 opacity-75',
+    default:  'border-2 border-stroke-brand    text-text-brand    bg-transparent px-4 py-3 hover:opacity-85 active:opacity-75',
+    hover:    'border-2 border-stroke-brand    text-text-brand    bg-transparent px-4 py-3 opacity-85',
+    pressed:  'border-2 border-stroke-brand    text-text-brand    bg-transparent px-4 py-3 opacity-75',
     disabled: 'border-2 border-stroke-disabled text-text-disabled bg-transparent px-4 py-3 cursor-not-allowed',
   },
 };
