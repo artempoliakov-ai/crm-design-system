@@ -14,7 +14,6 @@ interface InputProps {
   className?:   string;
 }
 
-// Border color per state — references @theme utilities via inline vars
 const borderColor: Record<InputState, string> = {
   Default:  'var(--color-stroke)',
   Hover:    'var(--color-stroke-hover)',
@@ -42,6 +41,29 @@ const labelColor: Record<InputState, string> = {
   Success:  'var(--color-text-success)',
 };
 
+const sizeConfig: Record<InputSize, {
+  height:   string;
+  padding:  string;
+  left:     string;
+  fontSize: string;
+  iconSize: string;
+}> = {
+  M: {
+    height:   'var(--height-input-md)',
+    padding:  'var(--spacing-8) var(--spacing-12)',
+    left:     'var(--spacing-12)',
+    fontSize: 'var(--text-body-md)',
+    iconSize: 'var(--spacing-20)',
+  },
+  S: {
+    height:   'var(--height-input-sm)',
+    padding:  'var(--spacing-4) var(--spacing-8)',
+    left:     'var(--spacing-8)',
+    fontSize: 'var(--text-body-sm)',
+    iconSize: 'var(--spacing-16)',
+  },
+};
+
 export function Input({
   state       = 'Default',
   size        = 'M',
@@ -51,32 +73,32 @@ export function Input({
   style,
   className,
 }: InputProps) {
-  const isM      = size === 'M';
-  const height   = isM ? 36 : 32;
-  const px       = isM ? 12 : 8;
-  const py       = isM ? 8 : 4;
-  const fontSize = isM ? 14 : 12;
-  const iconSize = isM ? 20 : 16;
-  const bg       = state === 'Disabled'
+  const cfg = sizeConfig[size];
+  const bg  = state === 'Disabled'
     ? 'var(--color-surface-disabled)'
     : 'var(--color-surface)';
 
   return (
     <div
       className={className}
-      style={{ position: 'relative', display: 'inline-block', paddingTop: label ? 12 : 0, ...style }}
+      style={{
+        position:    'relative',
+        display:     'inline-block',
+        paddingTop:  label ? 'var(--spacing-12)' : 0,
+        ...style,
+      }}
     >
       {label && (
         <div style={{
           position:   'absolute',
           top:        5,
-          left:       px,
+          left:       cfg.left,
           background: 'var(--color-surface)',
-          padding:    '0 4px',
+          padding:    '0 var(--spacing-4)',
           zIndex:     1,
           lineHeight: 1,
         }}>
-          <span style={{ fontSize: 11, color: labelColor[state], fontFamily: 'inherit' }}>
+          <span style={{ fontSize: 'var(--text-label)', color: labelColor[state], fontFamily: 'inherit' }}>
             {label}
           </span>
         </div>
@@ -84,17 +106,17 @@ export function Input({
       <div style={{
         display:      'flex',
         alignItems:   'center',
-        height,
-        padding:      `${py}px ${px}px`,
+        height:       cfg.height,
+        padding:      cfg.padding,
         border:       `1px solid ${borderColor[state]}`,
-        borderRadius: 6,
+        borderRadius: 'var(--border-radius-md)',
         background:   bg,
         boxSizing:    'border-box',
-        gap:          4,
+        gap:          'var(--spacing-4)',
       }}>
         <span style={{
           flex:       '1 0 0',
-          fontSize,
+          fontSize:   cfg.fontSize,
           color:      textColor[state],
           fontFamily: 'inherit',
           fontWeight: 400,
@@ -106,7 +128,12 @@ export function Input({
         </span>
         {icon && (
           <InfoOutlinedIcon
-            style={{ width: iconSize, height: iconSize, color: borderColor[state], flexShrink: 0 }}
+            style={{
+              width:     cfg.iconSize,
+              height:    cfg.iconSize,
+              color:     borderColor[state],
+              flexShrink: 0,
+            }}
           />
         )}
       </div>

@@ -31,8 +31,8 @@ const variants: Record<ButtonVariant, Record<ButtonState, string>> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  medium: 'h-[40px]',
-  large:  'h-[48px]',
+  medium: 'h-(--height-button-md)',
+  large:  'h-(--height-button-lg)',
 };
 
 export function Button({
@@ -49,8 +49,10 @@ export function Button({
 
   return (
     <button
+      type="button"
       className={[base, variants[variant][resolved], sizes[size], className].join(' ')}
       disabled={resolved === 'disabled'}
+      aria-disabled={resolved === 'disabled'}
       {...props}
     >
       {children}

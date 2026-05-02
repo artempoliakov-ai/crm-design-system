@@ -3,6 +3,8 @@ import { Button } from './components/Button';
 import { Input } from './components/Input';
 import { Badge } from './components/Badge';
 import { Tag } from './components/Tag';
+import { Avatar } from './components/Avatar';
+import { Divider } from './components/Divider';
 
 function Section({ title, children, gap = 'gap-4' }: { title: string; children: ReactNode; gap?: string }) {
   return (
@@ -140,6 +142,54 @@ function App() {
         {/* ── Tag / Variants ───────────────────────────────────────────────────── */}
         <Section title="Tag / Variants" gap="gap-3">
           <TagDemo />
+        </Section>
+
+        {/* ── Avatar ───────────────────────────────────────────────────────────── */}
+        <Section title="Avatar / Type" gap="gap-4">
+          <Labeled label="Initials">
+            <Avatar type="initials" size="M" initials="A" />
+          </Labeled>
+          <Labeled label="Icon">
+            <Avatar type="icon" size="M" />
+          </Labeled>
+          <Labeled label="Image (no src)">
+            <Avatar type="image" size="M" />
+          </Labeled>
+        </Section>
+
+        <Section title="Avatar / Size" gap="gap-3">
+          {(['XS', 'S', 'M', 'L', 'XL'] as const).map(s => (
+            <Labeled key={s} label={s}>
+              <Avatar type="initials" size={s} initials="A" />
+            </Labeled>
+          ))}
+        </Section>
+
+        {/* ── Divider ──────────────────────────────────────────────────────────── */}
+        <Section title="Divider / Horizontal" gap="gap-6">
+          <Labeled label="Default">
+            <div style={{ width: 300 }}>
+              <Divider orientation="horizontal" variant="default" />
+            </div>
+          </Labeled>
+          <Labeled label="Subtle">
+            <div style={{ width: 300 }}>
+              <Divider orientation="horizontal" variant="subtle" />
+            </div>
+          </Labeled>
+        </Section>
+
+        <Section title="Divider / Vertical" gap="gap-6">
+          <Labeled label="Default">
+            <div style={{ height: 48 }}>
+              <Divider orientation="vertical" variant="default" />
+            </div>
+          </Labeled>
+          <Labeled label="Subtle">
+            <div style={{ height: 48 }}>
+              <Divider orientation="vertical" variant="subtle" />
+            </div>
+          </Labeled>
         </Section>
 
       </div>

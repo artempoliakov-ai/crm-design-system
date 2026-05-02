@@ -1,55 +1,72 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   Tailwind theme — semantic utilities mapped from tokens.css
-   Usage: text-text-primary · bg-surface · border-stroke-brand · rounded-md
+   Tailwind theme — все значения через var() из tokens.css
+   Когда Figma меняется: regenerate tokens.css → этот файл подхватывает изменения
+   НЕ хардкодить hex напрямую в @theme
 ───────────────────────────────────────────────────────────────────────────── */
 @theme {
   /* ── Text colors ── */
-  --color-text-primary:   #141414;
-  --color-text-secondary: #383838;
-  --color-text-muted:     #5c5c5c;
-  --color-text-disabled:  #e0e0e0;
-  --color-text-brand:     #5569ff;
-  --color-text-white:     #ffffff;
-  --color-text-error:     #ff1943;
-  --color-text-success:   #00a76f;
+  --color-text-primary:     var(--text-text-primary);
+  --color-text-secondary:   var(--text-text-secondary);
+  --color-text-muted:       var(--text-text-tertiary);
+  --color-text-disabled:    var(--text-text-disabled);
+  --color-text-brand:       var(--text-brand);
+  --color-text-white:       var(--text-white);
+  --color-text-error:       var(--text-text-error);
+  --color-text-success:     var(--text-text-success);
 
   /* ── Backgrounds ── */
-  --color-page:            #f5f5f5;
-  --color-surface:         #ffffff;
-  --color-surface-brand:   #f8f9ff;
-  --color-surface-hover:   #eef0ff;
-  --color-surface-disabled:#f5f5f5;
+  --color-page:             var(--bg-primary-tertiary);
+  --color-surface:          var(--bg-primary-secondary);
+  --color-surface-brand:    var(--bg-primary-primary);
+  --color-surface-hover:    var(--bg-brand-hover);
+  --color-surface-disabled: var(--bg-primary-tertiary);
 
   /* ── Strokes / Borders ── */
-  --color-stroke:          #808080;
-  --color-stroke-light:    #a3a3a3;
-  --color-stroke-brand:    #5569ff;
-  --color-stroke-hover:    #7787ff;
-  --color-stroke-focus:    #4454cc;
-  --color-stroke-disabled: #e0e0e0;
-  --color-stroke-error:    #ff1943;
-  --color-stroke-success:  #00a76f;
+  --color-stroke:           var(--foreground-stroke-and-icons-default);
+  --color-stroke-light:     var(--foreground-stroke-and-icons-default-light);
+  --color-stroke-brand:     var(--foreground-stroke-and-icons-brand);
+  --color-stroke-hover:     var(--foreground-stroke-and-icons-hover);
+  --color-stroke-focus:     var(--foreground-stroke-and-icons-focused);
+  --color-stroke-disabled:  var(--foreground-stroke-and-icons-disabled);
+  --color-stroke-error:     var(--foreground-stroke-and-icons-error);
+  --color-stroke-success:   var(--foreground-stroke-and-icons-success);
 
   /* ── Brand interactive ── */
-  --color-brand:           #5569ff;
-  --color-brand-disabled:  #b8b8b8;
+  --color-brand:            var(--buttons-primary-default);
+  --color-brand-disabled:   var(--buttons-primary-disabled);
 
-  /* ── Border radius (override Tailwind defaults to match design system) ── */
-  --radius-sm:   4px;
-  --radius-md:   6px;
-  --radius-lg:   12px;
-  --radius-xl:   24px;
-  --radius-full: 9999px;
+  /* ── Border radius ── */
+  --radius-sm:   var(--border-radius-sm);
+  --radius-md:   var(--border-radius-md);
+  --radius-lg:   var(--border-radius-lg);
+  --radius-xl:   var(--border-radius-xl);
+  --radius-full: var(--border-radius-full);
 
   /* ── Shadows ── */
-  --shadow-card:
-    0 1px 1px 0 rgba(159, 162, 191, 0.32),
-    0 2px 3px 0 rgba(159, 162, 191, 0.18);
+  --shadow-card: var(--shadow-card-small);
+
+  /* ── Component heights — перенести в Figma Variables при удобном случае ── */
+  --height-button-md: var(--spacing-40);
+  --height-button-lg: var(--spacing-48);
+  --height-input-md:  36px;
+  --height-input-sm:  32px;
+
+  /* ── Avatar text scale ── */
+  --text-avatar-xs: 10px;
+  --text-avatar-s:  12px;
+  --text-avatar-m:  14px;
+  --text-avatar-l:  16px;
+  --text-avatar-xl: 18px;
+
+  /* ── Body / label typography scale ── */
+  --text-body-md: 14px;
+  --text-body-sm: 12px;
+  --text-label:   11px;
 }
 
-/* ── Base reset ───────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
