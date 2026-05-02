@@ -1,6 +1,8 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import { Button } from './components/Button';
 import { Input } from './components/Input';
+import { Badge } from './components/Badge';
+import { Tag } from './components/Tag';
 
 function Section({
   title,
@@ -151,7 +153,55 @@ function App() {
           </Labeled>
         </Section>
 
+        {/* ── Badge / Variants ─────────────────────────────────────────────────── */}
+        <Section title="Badge / Variants" gap={12}>
+          <Labeled label="Default">
+            <Badge variant="default">12</Badge>
+          </Labeled>
+          <Labeled label="Primary">
+            <Badge variant="primary">New</Badge>
+          </Labeled>
+          <Labeled label="Success">
+            <Badge variant="success">Done</Badge>
+          </Labeled>
+          <Labeled label="Error">
+            <Badge variant="error">Alert</Badge>
+          </Labeled>
+        </Section>
+
+        {/* ── Tag / Variants ───────────────────────────────────────────────────── */}
+        <Section title="Tag / Variants" gap={12}>
+          <TagDemo />
+        </Section>
+
       </div>
+    </div>
+  );
+}
+
+function TagDemo() {
+  const [tags, setTags] = useState(['React', 'TypeScript', 'Design System']);
+
+  return (
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      {tags.map(tag => (
+        <div key={tag} style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
+          <span style={{ fontSize: 11, color: 'var(--foreground-stroke-and-icons-default-light)', fontFamily: 'inherit' }}>
+            {tag}
+          </span>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <Tag variant="default" onClose={() => setTags(tags.filter(t => t !== tag))}>
+              {tag}
+            </Tag>
+            <Tag variant="primary">
+              {tag}
+            </Tag>
+            <Tag variant="outline">
+              {tag}
+            </Tag>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
