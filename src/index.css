@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Tailwind theme — semantic utilities mapped from tokens.css
+   Usage: text-text-primary · bg-surface · border-stroke-brand · rounded-md
+───────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* ── Text colors ── */
+  --color-text-primary:   #141414;
+  --color-text-secondary: #383838;
+  --color-text-muted:     #5c5c5c;
+  --color-text-disabled:  #e0e0e0;
+  --color-text-brand:     #5569ff;
+  --color-text-white:     #ffffff;
+  --color-text-error:     #ff1943;
+  --color-text-success:   #00a76f;
+
+  /* ── Backgrounds ── */
+  --color-page:            #f5f5f5;
+  --color-surface:         #ffffff;
+  --color-surface-brand:   #f8f9ff;
+  --color-surface-hover:   #eef0ff;
+  --color-surface-disabled:#f5f5f5;
+
+  /* ── Strokes / Borders ── */
+  --color-stroke:          #808080;
+  --color-stroke-light:    #a3a3a3;
+  --color-stroke-brand:    #5569ff;
+  --color-stroke-hover:    #7787ff;
+  --color-stroke-focus:    #4454cc;
+  --color-stroke-disabled: #e0e0e0;
+  --color-stroke-error:    #ff1943;
+  --color-stroke-success:  #00a76f;
+
+  /* ── Brand interactive ── */
+  --color-brand:           #5569ff;
+  --color-brand-disabled:  #b8b8b8;
+
+  /* ── Border radius (override Tailwind defaults to match design system) ── */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   12px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-card:
+    0 1px 1px 0 rgba(159, 162, 191, 0.32),
+    0 2px 3px 0 rgba(159, 162, 191, 0.18);
+}
+
+/* ── Base reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}

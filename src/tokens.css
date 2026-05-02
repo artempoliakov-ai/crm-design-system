@@ -1,0 +1,82 @@
+/* ── Primitives ────────────────────────────────────────────────────────────── */
+:root {
+  /* System/Gray */
+  --system-gray-50:  #ffffff;
+  --system-gray-100: #f5f5f5;
+  --system-gray-200: #e0e0e0;
+  --system-gray-500: #a3a3a3;
+  --system-gray-600: #808080;
+  --system-gray-700: #5c5c5c;
+  --system-gray-800: #383838;
+  --system-gray-900: #141414;
+
+  /* Brand/Blue */
+  --brand-blue-50:  #f8f9ff;
+  --brand-blue-100: #eef0ff;
+  --brand-blue-400: #7787ff;
+  --brand-blue-500: #5569ff;
+  --brand-blue-600: #4454cc;
+
+  /* System/Success */
+  --system-success-500: #00a76f;
+
+  /* System/Error */
+  --system-error-500: #ff1943;
+
+  /* ── Semantic — Text ───────────────────────────────────────────────────────── */
+  --text-text-primary:     var(--system-gray-900);
+  --text-text-secondary:   var(--system-gray-800);
+  --text-text-tertiary:    var(--system-gray-700);
+  --text-text-placeholder: var(--system-gray-700);
+  --text-text-disabled:    var(--system-gray-200);
+  --text-brand:            var(--brand-blue-500);
+  --text-white:            var(--system-gray-50);
+  --text-text-success:     var(--system-success-500);
+  --text-text-error:       var(--system-error-500);
+
+  /* ── Semantic — BG ─────────────────────────────────────────────────────────── */
+  --bg-primary-primary:   var(--brand-blue-50);
+  --bg-primary-secondary: var(--system-gray-50);
+  --bg-primary-tertiary:  var(--system-gray-100);
+  --bg-brand-hover:       var(--brand-blue-100);
+
+  /* ── Semantic — Foreground / Stroke and Icons ─────────────────────────────── */
+  --foreground-stroke-and-icons-default:       var(--system-gray-600);
+  --foreground-stroke-and-icons-default-light: var(--system-gray-500);
+  --foreground-stroke-and-icons-brand:         var(--brand-blue-500);
+  --foreground-stroke-and-icons-hover:         var(--brand-blue-400);
+  --foreground-stroke-and-icons-focused:       var(--brand-blue-600);
+  --foreground-stroke-and-icons-disabled:      var(--system-gray-200);
+  --foreground-stroke-and-icons-error:         var(--system-error-500);
+  --foreground-stroke-and-icons-success:       var(--system-success-500);
+
+  /* ── Components — Buttons ─────────────────────────────────────────────────── */
+  --buttons-primary-default:  var(--brand-blue-500);
+  --buttons-primary-disabled: #b8b8b8;
+
+  /* ── Spacing ───────────────────────────────────────────────────────────────── */
+  --spacing-2:  2px;
+  --spacing-4:  4px;
+  --spacing-8:  8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+
+  /* ── Border Radius ─────────────────────────────────────────────────────────── */
+  --border-radius-xs:   2px;
+  --border-radius-sm:   4px;
+  --border-radius-md:   6px;
+  --border-radius-lg:   12px;
+  --border-radius-xl:   24px;
+  --border-radius-full: 9999px;
+
+  /* ── Shadows ───────────────────────────────────────────────────────────────── */
+  --shadow-card-small:
+    0 1px 1px 0 rgba(159, 162, 191, 0.32),
+    0 2px 3px 0 rgba(159, 162, 191, 0.18);
+}
