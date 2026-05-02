@@ -7,16 +7,30 @@ interface BadgeProps {
   children: ReactNode;
 }
 
-const variants: Record<BadgeVariant, string> = {
-  default: 'bg-stroke-light text-text-white',
-  primary: 'bg-brand text-text-white',
-  success: 'bg-system-success-500 text-text-white',
-  error: 'bg-system-error-500 text-text-white',
+const variants: Record<BadgeVariant, { bg: string; text: string }> = {
+  default: { bg: 'var(--color-stroke-light)', text: 'var(--color-text-white)' },
+  primary: { bg: 'var(--color-brand)', text: 'var(--color-text-white)' },
+  success: { bg: 'var(--color-stroke-success)', text: 'var(--color-text-white)' },
+  error: { bg: 'var(--color-stroke-error)', text: 'var(--color-text-white)' },
 };
 
 export function Badge({ variant = 'default', children }: BadgeProps) {
+  const { bg, text } = variants[variant];
+
   return (
-    <span className={`inline-flex items-center justify-center px-2 py-1 rounded-full text-xs font-semibold ${variants[variant]}`}>
+    <span
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '4px 8px',
+        borderRadius: '9999px',
+        fontSize: '12px',
+        fontWeight: 600,
+        background: bg,
+        color: text,
+      }}
+    >
       {children}
     </span>
   );

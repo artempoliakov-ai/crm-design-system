@@ -4,29 +4,13 @@ import { Input } from './components/Input';
 import { Badge } from './components/Badge';
 import { Tag } from './components/Tag';
 
-function Section({
-  title,
-  children,
-  gap = 16,
-}: {
-  title: string;
-  children: ReactNode;
-  gap?: number;
-}) {
+function Section({ title, children, gap = 'gap-4' }: { title: string; children: ReactNode; gap?: string }) {
   return (
-    <section style={{ paddingTop: 48 }}>
-      <p style={{
-        fontSize:      11,
-        fontWeight:    600,
-        color:         'var(--foreground-stroke-and-icons-default)',
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        margin:        '0 0 16px',
-        fontFamily:    'inherit',
-      }}>
+    <section className="pt-12">
+      <p className="text-[11px] font-semibold tracking-widest uppercase text-stroke mb-4 font-sans">
         {title}
       </p>
-      <div style={{ display: 'flex', gap, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+      <div className={`flex flex-wrap items-start ${gap}`}>
         {children}
       </div>
     </section>
@@ -35,10 +19,8 @@ function Section({
 
 function Labeled({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
-      <span style={{ fontSize: 11, color: 'var(--foreground-stroke-and-icons-default-light)', fontFamily: 'inherit' }}>
-        {label}
-      </span>
+    <div className="flex flex-col gap-1.5 items-start">
+      <span className="text-[11px] text-stroke-light font-sans">{label}</span>
       {children}
     </div>
   );
@@ -46,29 +28,15 @@ function Labeled({ label, children }: { label: string; children: ReactNode }) {
 
 function App() {
   return (
-    <div style={{
-      minHeight:  '100vh',
-      background: '#f5f5f5',
-      fontFamily: 'Inter, system-ui, sans-serif',
-    }}>
-      <div style={{
-        maxWidth: 1200,
-        margin:   '0 auto',
-        padding:  '48px 48px 80px',
-      }}>
+    <div className="min-h-screen bg-page font-sans">
+      <div className="max-w-[1200px] mx-auto px-12 pt-12 pb-20">
 
-        <h1 style={{
-          fontSize:   24,
-          fontWeight: 700,
-          color:      'var(--text-text-primary)',
-          margin:     0,
-          fontFamily: 'inherit',
-        }}>
+        <h1 className="text-2xl font-bold text-text-primary m-0">
           CRM Design System
         </h1>
 
         {/* ── Button / Primary ─────────────────────────────────────────────────── */}
-        <Section title="Button / Primary" gap={16}>
+        <Section title="Button / Primary">
           <Labeled label="Default">
             <Button variant="primary">Sign In</Button>
           </Labeled>
@@ -84,7 +52,7 @@ function App() {
         </Section>
 
         {/* ── Button / Outline ─────────────────────────────────────────────────── */}
-        <Section title="Button / Outline" gap={16}>
+        <Section title="Button / Outline">
           <Labeled label="Default">
             <Button variant="outline">Export</Button>
           </Labeled>
@@ -100,7 +68,7 @@ function App() {
         </Section>
 
         {/* ── Button / Size ────────────────────────────────────────────────────── */}
-        <Section title="Button / Size" gap={16}>
+        <Section title="Button / Size">
           <Labeled label="Medium — 40px">
             <Button size="medium">Sign In</Button>
           </Labeled>
@@ -110,7 +78,7 @@ function App() {
         </Section>
 
         {/* ── Input / States M ─────────────────────────────────────────────────── */}
-        <Section title="Input / States — Size M" gap={24}>
+        <Section title="Input / States — Size M" gap="gap-6">
           <Labeled label="Default">
             <Input state="Default" size="M" label="Label" style={{ width: 300 }} />
           </Labeled>
@@ -132,7 +100,7 @@ function App() {
         </Section>
 
         {/* ── Input / States S ─────────────────────────────────────────────────── */}
-        <Section title="Input / States — Size S" gap={24}>
+        <Section title="Input / States — Size S" gap="gap-6">
           <Labeled label="Default">
             <Input state="Default" size="S" label="Label" style={{ width: 300 }} />
           </Labeled>
@@ -154,7 +122,7 @@ function App() {
         </Section>
 
         {/* ── Badge / Variants ─────────────────────────────────────────────────── */}
-        <Section title="Badge / Variants" gap={12}>
+        <Section title="Badge / Variants" gap="gap-3">
           <Labeled label="Default">
             <Badge variant="default">12</Badge>
           </Labeled>
@@ -170,7 +138,7 @@ function App() {
         </Section>
 
         {/* ── Tag / Variants ───────────────────────────────────────────────────── */}
-        <Section title="Tag / Variants" gap={12}>
+        <Section title="Tag / Variants" gap="gap-3">
           <TagDemo />
         </Section>
 
@@ -183,22 +151,16 @@ function TagDemo() {
   const [tags, setTags] = useState(['React', 'TypeScript', 'Design System']);
 
   return (
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+    <div className="flex gap-3 flex-wrap">
       {tags.map(tag => (
-        <div key={tag} style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
-          <span style={{ fontSize: 11, color: 'var(--foreground-stroke-and-icons-default-light)', fontFamily: 'inherit' }}>
-            {tag}
-          </span>
-          <div style={{ display: 'flex', gap: 8 }}>
+        <div key={tag} className="flex flex-col gap-1.5 items-start">
+          <span className="text-[11px] text-stroke-light font-sans">{tag}</span>
+          <div className="flex gap-2">
             <Tag variant="default" onClose={() => setTags(tags.filter(t => t !== tag))}>
               {tag}
             </Tag>
-            <Tag variant="primary">
-              {tag}
-            </Tag>
-            <Tag variant="outline">
-              {tag}
-            </Tag>
+            <Tag variant="primary">{tag}</Tag>
+            <Tag variant="outline">{tag}</Tag>
           </div>
         </div>
       ))}
