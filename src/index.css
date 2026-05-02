@@ -49,10 +49,11 @@
   --shadow-card: var(--shadow-card-small);
 
   /* ── Component heights — перенести в Figma Variables при удобном случае ── */
-  --height-button-md: var(--spacing-40);
-  --height-button-lg: var(--spacing-48);
-  --height-input-md:  36px;
-  --height-input-sm:  32px;
+  --height-button-md:       var(--spacing-40);
+  --height-button-lg:       var(--spacing-48);
+  --height-input-md:        36px;
+  --height-input-sm:        32px;
+  --input-label-offset:     5px;
 
   /* ── Avatar text scale ── */
   --text-avatar-xs: 10px;

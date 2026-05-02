@@ -1,76 +1,87 @@
-import { useState, type CSSProperties, type FocusEvent, type ChangeEvent, type MouseEvent } from 'react';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useState, type ReactNode, type CSSProperties, type FocusEvent, type ChangeEvent, type MouseEvent } from 'react';
 
 type InputDocState = 'Default' | 'Hover' | 'Focus' | 'Disabled' | 'Error' | 'Success';
 type InputSize     = 'M' | 'S';
 
 interface InputProps {
-  size?:          InputSize;
-  label?:         string;
-  placeholder?:   string;
-  disabled?:      boolean;
-  error?:         boolean;
-  success?:       boolean;
-  icon?:          boolean;
-  value?:         string;
-  onChange?:      (e: ChangeEvent<HTMLInputElement>) => void;
-  onFocus?:       (e: FocusEvent<HTMLInputElement>) => void;
-  onBlur?:        (e: FocusEvent<HTMLInputElement>) => void;
-  onMouseEnter?:  (e: MouseEvent<HTMLDivElement>) => void;
-  onMouseLeave?:  (e: MouseEvent<HTMLDivElement>) => void;
+  size?:         InputSize;
+  label?:        string;
+  placeholder?:  string;
+  disabled?:     boolean;
+  error?:        boolean;
+  success?:      boolean;
+  icon?:         ReactNode;
+  value?:        string;
+  onChange?:     (e: ChangeEvent<HTMLInputElement>) => void;
+  onFocus?:      (e: FocusEvent<HTMLInputElement>) => void;
+  onBlur?:       (e: FocusEvent<HTMLInputElement>) => void;
+  onMouseEnter?: (e: MouseEvent<HTMLDivElement>) => void;
+  onMouseLeave?: (e: MouseEvent<HTMLDivElement>) => void;
   /** docs-only: force a specific visual state */
-  state?:         InputDocState;
-  style?:         CSSProperties;
-  className?:     string;
+  state?:        InputDocState;
+  style?:        CSSProperties;
+  className?:    string;
 }
 
-const borderColor: Record<InputDocState, string> = {
-  Default:  'var(--color-stroke)',
-  Hover:    'var(--color-stroke-hover)',
-  Focus:    'var(--color-stroke-focus)',
-  Disabled: 'var(--color-stroke-disabled)',
-  Error:    'var(--color-stroke-error)',
-  Success:  'var(--color-stroke-success)',
+const borderClass: Record<InputDocState, string> = {
+  Default:  'border-stroke',
+  Hover:    'border-stroke-hover',
+  Focus:    'border-stroke-focus',
+  Disabled: 'border-stroke-disabled',
+  Error:    'border-stroke-error',
+  Success:  'border-stroke-success',
 };
 
-const textColor: Record<InputDocState, string> = {
-  Default:  'var(--color-text-muted)',
-  Hover:    'var(--color-text-muted)',
-  Focus:    'var(--color-text-primary)',
-  Disabled: 'var(--color-stroke-light)',
-  Error:    'var(--color-text-error)',
-  Success:  'var(--color-text-success)',
+const inputTextClass: Record<InputDocState, string> = {
+  Default:  'text-text-muted',
+  Hover:    'text-text-muted',
+  Focus:    'text-text-primary',
+  Disabled: 'text-stroke-light',
+  Error:    'text-text-error',
+  Success:  'text-text-success',
 };
 
-const labelColor: Record<InputDocState, string> = {
-  Default:  'var(--color-text-muted)',
-  Hover:    'var(--color-text-muted)',
-  Focus:    'var(--color-text-muted)',
-  Disabled: 'var(--color-text-muted)',
-  Error:    'var(--color-text-error)',
-  Success:  'var(--color-text-success)',
+const labelTextClass: Record<InputDocState, string> = {
+  Default:  'text-text-muted',
+  Hover:    'text-text-muted',
+  Focus:    'text-text-muted',
+  Disabled: 'text-text-muted',
+  Error:    'text-text-error',
+  Success:  'text-text-success',
 };
 
-const sizeConfig: Record<InputSize, {
-  height:   string;
-  padding:  string;
-  left:     string;
-  fontSize: string;
-  iconSize: string;
+const iconColorClass: Record<InputDocState, string> = {
+  Default:  'text-stroke',
+  Hover:    'text-stroke-hover',
+  Focus:    'text-stroke-focus',
+  Disabled: 'text-stroke-disabled',
+  Error:    'text-stroke-error',
+  Success:  'text-stroke-success',
+};
+
+const sizeClass: Record<InputSize, {
+  wrapPt:    string;
+  height:    string;
+  px:        string;
+  text:      string;
+  labelLeft: string;
+  iconSize:  string;
 }> = {
   M: {
-    height:   'var(--height-input-md)',
-    padding:  'var(--spacing-8) var(--spacing-12)',
-    left:     'var(--spacing-12)',
-    fontSize: 'var(--text-body-md)',
-    iconSize: 'var(--spacing-20)',
+    wrapPt:    'pt-(--spacing-12)',
+    height:    'h-(--height-input-md)',
+    px:        'px-(--spacing-12)',
+    text:      'text-body-md',
+    labelLeft: 'left-(--spacing-12)',
+    iconSize:  'size-(--spacing-20)',
   },
   S: {
-    height:   'var(--height-input-sm)',
-    padding:  'var(--spacing-4) var(--spacing-8)',
-    left:     'var(--spacing-8)',
-    fontSize: 'var(--text-body-sm)',
-    iconSize: 'var(--spacing-16)',
+    wrapPt:    'pt-(--spacing-12)',
+    height:    'h-(--height-input-sm)',
+    px:        'px-(--spacing-8)',
+    text:      'text-body-sm',
+    labelLeft: 'left-(--spacing-8)',
+    iconSize:  'size-(--spacing-16)',
   },
 };
 
@@ -81,7 +92,7 @@ export function Input({
   disabled     = false,
   error        = false,
   success      = false,
-  icon         = false,
+  icon,
   value,
   onChange,
   onFocus,
@@ -105,83 +116,37 @@ export function Input({
     return 'Default';
   })();
 
-  const cfg = sizeConfig[size];
-  const bg  = visualState === 'Disabled'
-    ? 'var(--color-surface-disabled)'
-    : 'var(--color-surface)';
+  const cfg     = sizeClass[size];
+  const bgClass = visualState === 'Disabled' ? 'bg-surface-disabled' : 'bg-surface';
 
   return (
     <div
-      className={className}
-      style={{
-        position:   'relative',
-        display:    'inline-block',
-        paddingTop: label ? 'var(--spacing-12)' : 0,
-        ...style,
-      }}
+      className={`relative inline-block ${label ? cfg.wrapPt : ''} ${className ?? ''}`}
+      style={style}
       onMouseEnter={e => { setHovered(true);  onMouseEnter?.(e); }}
       onMouseLeave={e => { setHovered(false); onMouseLeave?.(e); }}
     >
       {label && (
-        <div style={{
-          position:   'absolute',
-          top:        5,
-          left:       cfg.left,
-          background: bg,
-          padding:    '0 var(--spacing-4)',
-          zIndex:     1,
-          lineHeight: 1,
-        }}>
-          <span style={{ fontSize: 'var(--text-label)', color: labelColor[visualState], fontFamily: 'inherit' }}>
-            {label}
-          </span>
+        <div className={`absolute top-(--input-label-offset) ${cfg.labelLeft} ${bgClass} px-(--spacing-4) z-[1] leading-none`}>
+          <span className={`text-label ${labelTextClass[visualState]}`}>{label}</span>
         </div>
       )}
 
-      <div style={{
-        display:      'flex',
-        alignItems:   'center',
-        height:       cfg.height,
-        padding:      cfg.padding,
-        border:       `1px solid ${borderColor[visualState]}`,
-        borderRadius: 'var(--border-radius-md)',
-        background:   bg,
-        boxSizing:    'border-box',
-        gap:          'var(--spacing-4)',
-        transition:   'border-color 0.15s',
-      }}>
+      <div className={`flex items-center ${cfg.height} ${cfg.px} border ${borderClass[visualState]} rounded-md ${bgClass} gap-(--spacing-4) transition-colors`}>
         <input
           type="text"
           value={value}
           onChange={onChange}
           disabled={disabled}
           placeholder={placeholder}
-          style={{
-            flex:       '1 0 0',
-            fontSize:   cfg.fontSize,
-            color:      textColor[visualState],
-            fontFamily: 'inherit',
-            fontWeight: 400,
-            lineHeight: 1,
-            border:     'none',
-            outline:    'none',
-            background: 'transparent',
-            cursor:     disabled ? 'not-allowed' : 'text',
-            padding:    0,
-            minWidth:   0,
-          }}
+          className={`flex-1 min-w-0 border-0 outline-none bg-transparent p-0 leading-none ${cfg.text} ${inputTextClass[visualState]} ${disabled ? 'cursor-not-allowed' : 'cursor-text'}`}
           onFocus={e => { setFocused(true);  onFocus?.(e); }}
           onBlur={e  => { setFocused(false); onBlur?.(e);  }}
         />
         {icon && (
-          <InfoOutlinedIcon
-            style={{
-              width:      cfg.iconSize,
-              height:     cfg.iconSize,
-              color:      borderColor[visualState],
-              flexShrink: 0,
-            }}
-          />
+          <span className={`shrink-0 flex items-center justify-center ${cfg.iconSize} ${iconColorClass[visualState]}`}>
+            {icon}
+          </span>
         )}
       </div>
     </div>

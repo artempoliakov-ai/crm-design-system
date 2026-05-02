@@ -1,5 +1,6 @@
 import { type ReactNode, useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Button } from './components/Button';
 import { Input } from './components/Input';
 import { Badge } from './components/Badge';
@@ -273,7 +274,7 @@ function InputPlayground() {
         disabled={disabled}
         error={error}
         success={success}
-        icon={icon}
+        icon={icon ? <InfoOutlinedIcon style={{ fontSize: size === 'M' ? 20 : 16 }} /> : undefined}
         value={value}
         onChange={e => setValue(e.target.value)}
         onFocus={() => setFocused(true)}
