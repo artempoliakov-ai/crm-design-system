@@ -17,15 +17,15 @@ const variants: Record<TagVariant, string> = {
 
 export function Tag({ variant = 'default', onClose, children }: TagProps) {
   return (
-    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-md text-sm font-medium ${variants[variant]}`}>
+    <div className={`inline-flex items-center gap-(--spacing-8) px-(--spacing-12) py-(--spacing-4) rounded-md text-sm font-medium ${variants[variant]}`}>
       <span>{children}</span>
       {onClose && (
         <button
           onClick={onClose}
-          className="flex items-center justify-center w-4 h-4 hover:opacity-70 transition-opacity"
+          className="flex items-center justify-center size-(--spacing-16) hover:opacity-70 transition-opacity"
           aria-label="Remove tag"
         >
-          <CloseIcon style={{ width: 14, height: 14 }} />
+          <CloseIcon className="w-full h-full" />
         </button>
       )}
     </div>

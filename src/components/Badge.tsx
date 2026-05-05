@@ -21,17 +21,8 @@ export function Badge({ variant = 'default', children, ariaLabel }: BadgeProps) 
   return (
     <span
       aria-label={ariaLabel}
-      style={{
-        display:        'inline-flex',
-        alignItems:     'center',
-        justifyContent: 'center',
-        padding:        'var(--spacing-4) var(--spacing-8)',
-        borderRadius:   'var(--border-radius-full)',
-        fontSize:       'var(--text-body-sm)',
-        fontWeight:     600,
-        background:     bg,
-        color:          text,
-      }}
+      className="inline-flex items-center justify-center px-(--spacing-8) py-(--spacing-4) rounded-(--border-radius-full) text-body-sm font-semibold"
+      style={{ background: bg, color: text }}
     >
       {children}
     </span>
