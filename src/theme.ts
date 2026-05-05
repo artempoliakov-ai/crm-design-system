@@ -449,7 +449,7 @@ export const PureLightTheme = createTheme({
 		},
 		MuiSelect: {
 			styleOverrides: {
-				// @ts-ignore — valid MUI runtime class, missing from types
+				// @ts-expect-error — valid MUI runtime class, missing from types
 				iconOutlined: {
 					color: colors.alpha.black[50],
 				},
@@ -588,7 +588,7 @@ export const PureLightTheme = createTheme({
 					fontWeight: 'bold',
 					transition: 'all .2s',
 				},
-				// @ts-ignore — valid MUI runtime class, missing from types
+				// @ts-expect-error — valid MUI runtime class, missing from types
 				textPrimary: {
 					'&.Mui-selected': {
 						boxShadow: colors.shadows.primary,
@@ -618,7 +618,7 @@ export const PureLightTheme = createTheme({
 						transition: 'all .2s',
 					},
 				},
-				// @ts-ignore — valid MUI runtime class, missing from types
+				// @ts-expect-error — valid MUI runtime class, missing from types
 				outlinedPrimary: {
 					color: colors.primary.main,
 					borderColor: colors.primary.main,
@@ -1098,7 +1098,7 @@ export const PureLightTheme = createTheme({
 				gutterBottom: {
 					marginBottom: 4,
 				},
-				// @ts-ignore — valid MUI runtime class, missing from types
+				// @ts-expect-error — valid MUI runtime class, missing from types
 				paragraph: {
 					fontSize: 17,
 					lineHeight: 1.7,
