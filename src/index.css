@@ -62,6 +62,11 @@
   --text-avatar-l:  16px;
   --text-avatar-xl: 18px;
 
+  /* ── Heading typography scale — TODO: перенести в Figma Variables ── */
+  --text-heading-lg: 24px;
+  --text-heading-md: 20px;
+  --text-heading-sm: 16px;
+
   /* ── Body / label typography scale ── */
   --text-body-md: 14px;
   --text-body-sm: 12px;

@@ -5,6 +5,7 @@ type InputSize     = 'M' | 'S';
 
 interface InputProps {
   size?:         InputSize;
+  type?:         string;
   label?:        string;
   placeholder?:  string;
   disabled?:     boolean;
@@ -87,6 +88,7 @@ const sizeClass: Record<InputSize, {
 
 export function Input({
   size         = 'M',
+  type         = 'text',
   label,
   placeholder  = 'Placeholder',
   disabled     = false,
@@ -134,7 +136,7 @@ export function Input({
 
       <div className={`flex items-center ${cfg.height} ${cfg.px} border ${borderClass[visualState]} rounded-md ${bgClass} gap-(--spacing-4) transition-colors`}>
         <input
-          type="text"
+          type={type}
           value={value}
           onChange={onChange}
           disabled={disabled}
