@@ -16,7 +16,7 @@ function BlobBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden" aria-hidden="true" style={{ background: '#f5f5f5' }}>
+    <div className="fixed inset-0 overflow-hidden" aria-hidden="true" style={{ background: '#f5f5f5' }}>
       <div
         className="si-canvas"
         style={{ transform: `translate(-50%, -50%) rotate(180deg) scale(${String(scale)})` }}
