@@ -25,3 +25,9 @@ jobs:
 
       - name: ESLint
         run: npx eslint src --max-warnings=0
+
+      - name: Build
+        run: npm run build
+
+      - name: Security audit
+        run: npm audit --audit-level=high
