@@ -1,8 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import VisibilityOutlinedIcon    from '@mui/icons-material/VisibilityOutlined';
 import { Input }  from '../components/Input';
 import { Button } from '../components/Button';
+
+function BlobBackground() {
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const calc = () =>
+      setScale(Math.min(window.innerWidth / 1920, window.innerHeight / 1158));
+    calc();
+    window.addEventListener('resize', calc);
+    return () => window.removeEventListener('resize', calc);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true" style={{ background: '#f5f5f5' }}>
+      <div
+        className="si-canvas"
+        style={{ transform: `translate(-50%, -50%) rotate(180deg) scale(${String(scale)})` }}
+      >
+        <div className="si-blob-blue"  />
+        <div className="si-blob-glow"  />
+        <div className="si-blob-white" />
+        <div className="si-fade"       />
+      </div>
+    </div>
+  );
+}
 
 export function SignIn() {
   const [username,     setUsername]     = useState('');
@@ -12,9 +38,11 @@ export function SignIn() {
   const canSubmit = username.trim().length > 0 && password.trim().length > 0;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-surface-brand">
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+      <BlobBackground />
+
       <form
-        className="flex flex-col gap-(--spacing-24) p-(--spacing-32) rounded-(--border-radius-lg) bg-surface w-[492px]"
+        className="relative z-10 flex flex-col gap-(--spacing-24) p-(--spacing-32) rounded-(--border-radius-lg) bg-surface w-[492px]"
         style={{ boxShadow: 'var(--shadow-card-small)' }}
         onSubmit={e => e.preventDefault()}
         noValidate

@@ -79,3 +79,97 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, sans-serif;
 }
+
+/* ── Sign In — animated blob background ───────────────────────────────────── */
+/* Замкнутая орбита: 8 точек на окружности r=60px, linear — нет телепортации   */
+@keyframes si-orbit-blue {
+  0%    { transform: rotate(30deg)  translate(  0px,   0px); }
+  12.5% { transform: rotate(30deg)  translate( 42px,  18px); }
+  25%   { transform: rotate(30deg)  translate( 60px,  60px); }
+  37.5% { transform: rotate(30deg)  translate( 42px, 102px); }
+  50%   { transform: rotate(30deg)  translate(  0px, 120px); }
+  62.5% { transform: rotate(30deg)  translate(-42px, 102px); }
+  75%   { transform: rotate(30deg)  translate(-60px,  60px); }
+  87.5% { transform: rotate(30deg)  translate(-42px,  18px); }
+  100%  { transform: rotate(30deg)  translate(  0px,   0px); }
+}
+@keyframes si-orbit-glow {
+  0%    { transform: rotate(-20deg) translate(  0px,   0px) scale(1.00); }
+  12.5% { transform: rotate(-20deg) translate( 35px,  15px) scale(1.02); }
+  25%   { transform: rotate(-20deg) translate( 50px,  50px) scale(1.05); }
+  37.5% { transform: rotate(-20deg) translate( 35px,  85px) scale(1.07); }
+  50%   { transform: rotate(-20deg) translate(  0px, 100px) scale(1.08); }
+  62.5% { transform: rotate(-20deg) translate(-35px,  85px) scale(1.07); }
+  75%   { transform: rotate(-20deg) translate(-50px,  50px) scale(1.05); }
+  87.5% { transform: rotate(-20deg) translate(-35px,  15px) scale(1.02); }
+  100%  { transform: rotate(-20deg) translate(  0px,   0px) scale(1.00); }
+}
+@keyframes si-orbit-white {
+  0%    { transform: rotate(-15deg) translate(  0px,   0px); }
+  12.5% { transform: rotate(-15deg) translate( 32px,  14px); }
+  25%   { transform: rotate(-15deg) translate( 45px,  45px); }
+  37.5% { transform: rotate(-15deg) translate( 32px,  76px); }
+  50%   { transform: rotate(-15deg) translate(  0px,  90px); }
+  62.5% { transform: rotate(-15deg) translate(-32px,  76px); }
+  75%   { transform: rotate(-15deg) translate(-45px,  45px); }
+  87.5% { transform: rotate(-15deg) translate(-32px,  14px); }
+  100%  { transform: rotate(-15deg) translate(  0px,   0px); }
+}
+
+.si-canvas {
+  position: absolute;
+  width: 1920px; height: 1158px;
+  top: 50%; left: 50%;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+.si-blob-blue {
+  position: absolute;
+  width: 2600px; height: 2600px;
+  border-radius: 50%;
+  background: #3a55f7;
+  filter: blur(110px);
+  opacity: 0.55;
+  left: -1050px; top: -1200px;
+  transform-origin: center center;
+  animation: si-orbit-blue 9s linear infinite;
+}
+.si-blob-glow {
+  position: absolute;
+  width: 1800px; height: 1400px;
+  border-radius: 50%;
+  background: #6b85ff;
+  filter: blur(130px);
+  opacity: 0.20;
+  left: 200px; top: 400px;
+  transform-origin: center center;
+  animation: si-orbit-glow 11s linear infinite;
+}
+.si-blob-white {
+  position: absolute;
+  width: 1700px; height: 1300px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  filter: blur(110px);
+  opacity: 0.90;
+  left: -250px; top: -830px;
+  transform-origin: center center;
+  animation: si-orbit-white 13s linear infinite;
+}
+.si-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 147% 135% at 116% -26%,
+    #f5f5f5                       0%,
+    #f5f5f5                      20%,
+    rgba(245, 245, 245, 0.85)    40%,
+    rgba(245, 245, 245, 0.40)    60%,
+    transparent                  78%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .si-blob-blue, .si-blob-glow, .si-blob-white { animation: none; }
+}
