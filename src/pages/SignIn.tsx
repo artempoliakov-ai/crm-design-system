@@ -9,7 +9,7 @@ function BlobBackground() {
 
   useEffect(() => {
     const calc = () =>
-      setScale(Math.min(window.innerWidth / 1920, window.innerHeight / 1158));
+      setScale(Math.max(window.innerWidth / 1920, window.innerHeight / 1158));
     calc();
     window.addEventListener('resize', calc);
     return () => window.removeEventListener('resize', calc);
